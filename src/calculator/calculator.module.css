@@ -1,0 +1,74 @@
+.calculator {
+    width: 300px;
+    height: 550px;
+    background-color: black;
+    border-radius: 25px;
+    border: #505050 5px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 2px 2px 10px 0 #505050;
+}
+
+.backGroundCalc {
+    background-color: #D4D4D2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.counter {
+    width: 78%;
+    height: 18%;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    align-content: flex-end;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background-color: black;
+    color: #D4D4D2;
+    font-size: 60px;
+    font-family: "Segoe UI", fantasy;
+    text-align: right;
+    outline: none;
+    border: none;
+    padding-top: 20px;
+}
+
+.counterStorage {
+    width: 78%;
+    height: 4%;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    align-content: flex-end;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background-color: black;
+    color: #D4D4D2;
+    font-size: 30px;
+    font-family: "Segoe UI", fantasy;
+    text-align: right;
+    outline: none;
+    border: none;
+    opacity: 0.8;
+    text-underline: gray;
+}
+
+.calcBtn {
+    width: 86%;
+    height: 62%;
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+
+.buttons:active {
+    opacity: 0.8;
+}
