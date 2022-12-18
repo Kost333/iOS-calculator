@@ -65,23 +65,64 @@ const Calculator = () => {
         fontSize: {fontSize: styleFontSize + "px"}
     }
 
-    const handler = (value) => {
+    const getResult = (value) => {
+        const lastSymbol = String(result).slice(-1);
+        const firstNumber = Number(result.slice(0, result.length - 1));
+        const counterNum = Number(counter);
 
-        if (String(counter).length > 8) return
-        if (String(counter).length >= 6) {
-            setStyleFontSize(styleFontSize - 5)
+        if (lastSymbol === "+" || lastSymbol === "-" || lastSymbol === "*" || lastSymbol === "/" || lastSymbol === "%") {
+            setResult(result + counter + value);
         }
 
-        if (String(counter).includes('.')) {
-            setCounter(counter + value)
+        switch (lastSymbol) {
+            case '+': {
+                setCounter(firstNumber + counterNum)
+                break;
+            }
+            case '-': {
+                setCounter(firstNumber - counterNum)
+                break;
+            }
+            case '*': {
+                setCounter(firstNumber * counterNum)
+                break;
+            }
+            case '/': {
+                setCounter(firstNumber / counterNum)
+                break;
+            }
+            case '%': {
+                setCounter((firstNumber * counterNum) / 100)
+                break;
+            }
+        }
+    }
+
+    const handler = (value) => {
+        const counterStr = String(counter);
+        const canAddCounterNumber = !(counterStr.length > 7);
+
+        if (counterStr.length >= 7) {
+            setStyleFontSize(50)
+        } else if (counterStr.length === 6) {
+            setStyleFontSize(55)
         } else {
-            setCounter(counter * 10 + value)
+            setStyleFontSize(60)
+        }
+
+        if (canAddCounterNumber) {
+            if (counterStr.includes('.')) {
+                setCounter(counter + value)
+            } else {
+                setCounter(counter * 10 + value)
+            }
         }
 
         switch (value) {
             case `AC`:
                 setCounter(0);
                 setResult(0);
+                setStyleFontSize(60)
                 break;
             case '%B1':
                 setCounter(counter * (-1))
@@ -107,28 +148,17 @@ const Calculator = () => {
                 setCounter(0)
                 break;
             case `.`:
-                if (!String(counter).includes(value)) {
-                    setCounter(counter + value)
-                } else {
-                    setCounter(counter)
+                if (canAddCounterNumber) {
+                    if (!counterStr.includes(value)) {
+                        setCounter(counter + value)
+                    } else {
+                        setCounter(counter)
+                    }
                 }
                 break;
             case `=`:
-                if (String(result).slice(-1) === "+") {
-                    setResult(result + counter + value)
-                    setCounter(Number(result.slice(0, result.length - 1)) + Number(counter))
-                } else if (String(result).slice(-1) === "-") {
-                    setResult(result + counter + value)
-                    setCounter(Number(result.slice(0, result.length - 1)) - Number(counter))
-                } else if (String(result).slice(-1) === "*") {
-                    setResult(result + counter + value)
-                    setCounter(Number(result.slice(0, result.length - 1)) * Number(counter))
-                } else if (String(result).slice(-1) === "/") {
-                    setResult(result + counter + value)
-                    setCounter(Number(result.slice(0, result.length - 1)) / Number(counter))
-                } else if (String(result).slice(-1) === "%") {
-                    setResult(result + counter + value)
-                    setCounter((Number(result.slice(0, result.length - 1)) * Number(counter)) / 100)
+                if (canAddCounterNumber) {
+                    getResult(value);
                 }
                 break;
         }
